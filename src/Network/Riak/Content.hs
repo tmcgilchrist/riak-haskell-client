@@ -22,13 +22,14 @@ module Network.Riak.Content
     , link
     ) where
 
-import Data.Aeson (encode)
-import Data.Aeson.Types (ToJSON)
-import Network.Riak.Protocol.Content (Content(..))
-import Network.Riak.Types.Internal (Bucket, Key, Tag)
+import           Data.Aeson (encode)
+import           Data.Aeson.Types (ToJSON)
 import qualified Data.ByteString.Lazy.Char8 as L
 import qualified Data.Sequence as Seq
+
+import           Network.Riak.Protocol.Content (Content(..))
 import qualified Network.Riak.Protocol.Link as Link
+import           Network.Riak.Types.Internal (Bucket, Key, Tag)
 
 -- | Create a link.
 link :: Bucket -> Key -> Tag -> Link.Link

@@ -78,8 +78,8 @@ module Network.Riak
     , IndexValue(..)
     ) where
 
-import Network.Riak.Basic hiding (get, put, put_)
-import Network.Riak.JSON.Resolvable (get, getMany, modify, modify_, put, putIndexed, putMany)
-import Network.Riak.Resolvable (Resolvable(..))
-import Network.Riak.Value (getByIndex, addIndexes)
-import Network.Riak.Types.Internal (IndexQuery(..), IndexValue(..))
+import           Network.Riak.Basic hiding (get, put)
+import           Network.Riak.JSON.Resolvable (get, getMany, modify, modify_, put, putIndexed, putMany)
+import           Network.Riak.Resolvable (Resolvable(..))
+import           Network.Riak.Types.Internal (IndexQuery(..), IndexValue(..))
+import           Network.Riak.Value (getByIndex, addIndexes)

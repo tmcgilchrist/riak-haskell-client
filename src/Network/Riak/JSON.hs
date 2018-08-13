@@ -1,6 +1,6 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE CPP #-}
 
 -- |
 -- Module:      Network.Riak.JSON
@@ -29,16 +29,16 @@ module Network.Riak.JSON
     ) where
 
 #if __GLASGOW_HASKELL__ < 710
-import Control.Applicative ((<$>))
+import           Control.Applicative ((<$>))
 #endif
-import Control.Arrow (first)
-import Data.Aeson.Types (FromJSON(..), ToJSON(..))
+import           Control.Arrow (first)
+import           Data.Aeson.Types (FromJSON(..), ToJSON(..))
 #if __GLASGOW_HASKELL__ < 710
-import Data.Monoid (Monoid)
+import           Data.Monoid (Monoid)
 #endif
-import Data.Semigroup (Semigroup)
-import Data.Typeable (Typeable)
-import Network.Riak.Types.Internal
+import           Data.Semigroup (Semigroup)
+import           Data.Typeable (Typeable)
+import           Network.Riak.Types.Internal
 import qualified Network.Riak.Value as V
 
 newtype JSON a = J {

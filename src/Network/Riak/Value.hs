@@ -1,5 +1,7 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving, OverloadedStrings, RecordWildCards,
-    StandaloneDeriving #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StandaloneDeriving #-}
 
 -- |
 -- Module:      Network.Riak.Value
@@ -30,27 +32,29 @@ module Network.Riak.Value
     , putMany_
     ) where
 
-import Control.Applicative
-import Data.Aeson.Types (Parser, Result(..), parse)
-import Data.Foldable (toList)
-import Data.Monoid ((<>))
-import Network.Riak.Connection.Internal
-import Network.Riak.Protocol.Content (Content(..))
-import Network.Riak.Protocol.GetResponse (GetResponse(..))
-import Network.Riak.Protocol.IndexResponse (IndexResponse(..))
-import Network.Riak.Protocol.PutResponse (PutResponse(..))
-import Network.Riak.Resolvable (ResolvableMonoid(..))
-import Network.Riak.Response (unescapeLinks)
-import Network.Riak.Types.Internal hiding (MessageTag(..))
-import qualified Network.Riak.Protocol.Pair as Pair
+import           Control.Applicative
+
 import qualified Data.Aeson.Parser as Aeson
+import           Data.Aeson.Types (Parser, Result(..), parse)
 import qualified Data.Aeson.Types as Aeson
 import qualified Data.Attoparsec.Lazy as A
 import qualified Data.ByteString.Lazy as L
 import qualified Data.ByteString.Lazy.Char8 as CL8
+import           Data.Foldable (toList)
+import           Data.Monoid ((<>))
 import qualified Data.Sequence as Seq
+
+import           Network.Riak.Connection.Internal
 import qualified Network.Riak.Content as C
+import           Network.Riak.Protocol.Content (Content(..))
+import           Network.Riak.Protocol.GetResponse (GetResponse(..))
+import           Network.Riak.Protocol.IndexResponse (IndexResponse(..))
+import qualified Network.Riak.Protocol.Pair as Pair
+import           Network.Riak.Protocol.PutResponse (PutResponse(..))
 import qualified Network.Riak.Request as Req
+import           Network.Riak.Resolvable (ResolvableMonoid(..))
+import           Network.Riak.Response (unescapeLinks)
+import           Network.Riak.Types.Internal hiding (MessageTag(..))
 
 fromContent :: IsContent c => Content -> Maybe c
 fromContent c = case parse parseContent c of
@@ -136,7 +140,7 @@ putMany conn bt b puts w dw =
   mapM putResp =<< pipeline conn (map (\(k,v,c) -> Req.put bt b k v (toContent c) w dw True) puts)
 
 putResp :: (IsContent c) => PutResponse -> IO ([c], VClock)
-putResp PutResponse{..} = do
+putResp PutResponse{..} =
   case vclock of
     Nothing -> return ([], VClock L.empty)
     Just s  -> do

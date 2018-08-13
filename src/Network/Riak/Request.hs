@@ -1,4 +1,5 @@
-{-# LANGUAGE OverloadedStrings, CPP #-}
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 -- |
 -- Module:      Network.Riak.Request
@@ -53,21 +54,22 @@ module Network.Riak.Request
     ) where
 
 #if __GLASGOW_HASKELL__ < 710
-import Control.Applicative ((<$>))
+import           Control.Applicative ((<$>))
 #endif
 import qualified Data.ByteString.Char8 as B8
 #if __GLASGOW_HASKELL__ < 804
-import Data.Monoid
+import           Data.Monoid
 #endif
-import Network.Riak.Protocol.BucketProps (BucketProps)
-import Network.Riak.Protocol.Content
-import Network.Riak.Protocol.GetClientIDRequest
-import Network.Riak.Protocol.GetServerInfoRequest
-import Network.Riak.Protocol.ListBucketsRequest
-import Network.Riak.Protocol.MapReduceRequest
-import Network.Riak.Protocol.PingRequest
-import Network.Riak.Types.Internal hiding (MessageTag(..))
-import Network.Riak.Escape (escape)
+
+import           Network.Riak.Protocol.BucketProps (BucketProps)
+import           Network.Riak.Protocol.Content
+import           Network.Riak.Protocol.GetClientIDRequest
+import           Network.Riak.Protocol.GetServerInfoRequest
+import           Network.Riak.Protocol.ListBucketsRequest
+import           Network.Riak.Protocol.MapReduceRequest
+import           Network.Riak.Protocol.PingRequest
+import           Network.Riak.Types.Internal hiding (MessageTag(..))
+import           Network.Riak.Escape (escape)
 import qualified Network.Riak.Protocol.DeleteRequest as Del
 import qualified Network.Riak.Protocol.Link as Link
 import qualified Network.Riak.Protocol.GetBucketRequest as GetBucket

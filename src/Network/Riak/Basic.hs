@@ -1,4 +1,6 @@
-{-# LANGUAGE BangPatterns, OverloadedStrings, RecordWildCards, CPP #-}
+{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE RecordWildCards#-}
+{-# LANGUAGE CPP #-}
 
 -- |
 -- Module:      Network.Riak.Basic
@@ -45,20 +47,22 @@ module Network.Riak.Basic
     ) where
 
 #if __GLASGOW_HASKELL__ < 710
-import Control.Applicative ((<$>))
+import           Control.Applicative ((<$>))
 #endif
-import Control.Monad.IO.Class
-import Data.Maybe (fromMaybe)
-import Network.Riak.Connection.Internal
-import Network.Riak.Escape (unescape)
-import Network.Riak.Protocol.BucketProps
-import Network.Riak.Protocol.Content
-import Network.Riak.Protocol.ListKeysResponse
-import Network.Riak.Protocol.MapReduce as MapReduce
-import Network.Riak.Protocol.ServerInfo
-import Network.Riak.Types.Internal hiding (MessageTag(..))
+import           Control.Monad.IO.Class
+
+import           Data.Maybe (fromMaybe)
 import qualified Data.Foldable as F
 import qualified Data.Sequence as Seq
+
+import           Network.Riak.Connection.Internal
+import           Network.Riak.Escape (unescape)
+import           Network.Riak.Protocol.BucketProps
+import           Network.Riak.Protocol.Content
+import           Network.Riak.Protocol.ListKeysResponse
+import           Network.Riak.Protocol.MapReduce as MapReduce
+import           Network.Riak.Protocol.ServerInfo
+import           Network.Riak.Types.Internal hiding (MessageTag(..))
 import qualified Network.Riak.Request as Req
 import qualified Network.Riak.Response as Resp
 import qualified Network.Riak.Types.Internal as T

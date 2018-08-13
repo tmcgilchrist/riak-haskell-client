@@ -1,4 +1,9 @@
-{-# LANGUAGE CPP                 #-}
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE PatternGuards #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeFamilies #-}
 {- | module:    Network.Riak.CRDT
      copyright: (c) 2016 Sentenai
      author:    Antonio Nikishaev <me@lelf.lu>
@@ -32,8 +37,6 @@ Just (DTCounter (Counter 41))
 Just (DTCounter (Counter 42))
 
 -}
-{-# LANGUAGE TypeFamilies, OverloadedStrings, ScopedTypeVariables, PatternGuards #-}
-{-# LANGUAGE MultiParamTypeClasses, FunctionalDependencies #-}
 
 module Network.Riak.CRDT (
     module X
@@ -41,24 +44,22 @@ module Network.Riak.CRDT (
   , CRDT(..)
   ) where
 
-import Data.Default.Class
+import           Data.Default.Class
 import qualified Data.Map as M
-import Data.Proxy
+import           Data.Proxy
 #if __GLASGOW_HASKELL__ < 804
-import Data.Semigroup
+import           Data.Semigroup
 #endif
 import qualified Data.Set as S
-import Network.Riak.CRDT.Ops
-import Network.Riak.CRDT.Riak
-import Network.Riak.CRDT.Types as X
-import Network.Riak.Types
-
+import           Network.Riak.CRDT.Ops
+import           Network.Riak.CRDT.Riak
+import           Network.Riak.CRDT.Types as X
+import           Network.Riak.Types
 
 -- | Modify a counter by applying operations ops
 modifyCounter :: CounterOp -> Counter -> Counter
 modifyCounter op c = c <> Counter i
     where CounterInc i = op
-
 
 
 -- | Modify a set by applying operations ops

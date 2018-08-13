@@ -1,4 +1,5 @@
-{-# LANGUAGE CPP, ScopedTypeVariables #-}
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
 -- Module:      Network.Riak.Debug
@@ -21,13 +22,15 @@ module Network.Riak.Debug
     , showM
     ) where
 
-import Control.Concurrent.MVar (MVar, modifyMVar_, newMVar, withMVar)
-import Control.Exception hiding (handle)
-import Control.Monad (forM_, when)
-import Network.Riak.Types.Internal
-import System.Environment (getEnv)
-import System.IO (Handle, hPutStrLn, stderr)
-import System.IO.Unsafe (unsafePerformIO)
+import           Control.Concurrent.MVar (MVar, modifyMVar_, newMVar, withMVar)
+import           Control.Exception
+import           Control.Monad (forM_, when)
+
+import           Network.Riak.Types.Internal
+
+import           System.Environment (getEnv)
+import           System.IO (Handle, hPutStrLn, stderr)
+import           System.IO.Unsafe (unsafePerformIO)
 
 -- | The current debugging level.  This is established once by reading
 -- the @RIAK_DEBUG@ environment variable.

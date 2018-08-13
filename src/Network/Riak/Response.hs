@@ -1,4 +1,6 @@
-{-# LANGUAGE NamedFieldPuns, RecordWildCards, CPP, OverloadedStrings #-}
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE RecordWildCards #-}
 
 -- |
 -- Module:      Network.Riak.Request
@@ -29,30 +31,31 @@ module Network.Riak.Response
     ) where
 
 #if __GLASGOW_HASKELL__ < 710
-import Control.Applicative ((<$>))
-import Data.Semigroup
-import Control.Arrow ((&&&))
-import Control.Monad (join)
+import           Control.Applicative ((<$>))
+import           Control.Arrow ((&&&))
+import           Control.Monad (join)
+
+import           Data.Semigroup
 #endif
-import Network.Riak.Escape (unescape)
-import Network.Riak.Protocol.BucketProps (BucketProps)
-import Network.Riak.Protocol.Content
-import Network.Riak.Protocol.GetBucketResponse
-import Network.Riak.Protocol.GetClientIDResponse
-import Network.Riak.Protocol.GetResponse
-import Network.Riak.Protocol.ListBucketsResponse
-import Network.Riak.Protocol.PutResponse
-import qualified Network.Riak.Protocol.SearchQueryResponse as Q
-import qualified Network.Riak.Protocol.SearchDoc as Q
-import qualified Network.Riak.Protocol.YzIndexGetResponse as Yz
-import Network.Riak.Types.Internal hiding (MessageTag(..))
-import qualified Network.Riak.Protocol.Link as Link
-import qualified Network.Riak.Protocol.Pair as Pair
 
 import qualified Data.ByteString.Lazy as L
 import qualified Data.Sequence as Seq
-import Data.Maybe (fromMaybe)
-import Data.Foldable (toList)
+import           Data.Maybe (fromMaybe)
+import           Data.Foldable (toList)
+
+import           Network.Riak.Protocol.BucketProps (BucketProps)
+import           Network.Riak.Protocol.Content
+import           Network.Riak.Protocol.GetBucketResponse
+import           Network.Riak.Protocol.GetClientIDResponse
+import           Network.Riak.Protocol.GetResponse
+import           Network.Riak.Protocol.ListBucketsResponse
+import           Network.Riak.Protocol.PutResponse
+import qualified Network.Riak.Protocol.SearchQueryResponse as Q
+import qualified Network.Riak.Protocol.SearchDoc as Q
+import qualified Network.Riak.Protocol.YzIndexGetResponse as Yz
+import           Network.Riak.Types.Internal hiding (MessageTag(..))
+import qualified Network.Riak.Protocol.Link as Link
+import qualified Network.Riak.Protocol.Pair as Pair
 
 getClientID :: GetClientIDResponse -> ClientID
 getClientID = client_id

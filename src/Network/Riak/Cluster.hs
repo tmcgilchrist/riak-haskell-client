@@ -1,5 +1,5 @@
-{-# LANGUAGE DeriveDataTypeable    #-}
-{-# LANGUAGE FlexibleContexts      #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 
 module Network.Riak.Cluster
@@ -18,10 +18,13 @@ import           Control.Exception.Enclosed
 import           Control.Monad.Base            (liftBase)
 import           Control.Monad.Catch           (MonadThrow (..))
 import           Control.Monad.Trans.Control   (MonadBaseControl)
+
 import           Data.Typeable
+
 import           Network.Riak                  (Connection)
 import qualified Network.Riak                  as Riak
 import qualified Network.Riak.Connection.Pool  as Riak
+
 import           System.Random.Mersenne.Pure64
 
 -- | Datatype holding connection-pool with all known cluster nodes

@@ -1,4 +1,6 @@
-{-# LANGUAGE FlexibleInstances, OverloadedStrings, CPP #-}
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 -- |
 -- Module:      Network.Riak.Connection
@@ -22,21 +24,23 @@ module Network.Riak.Escape
     , unescape
     ) where
 
-import Blaze.ByteString.Builder (Builder, fromByteString, toByteString, toLazyByteString)
-import Blaze.ByteString.Builder.Word (fromWord8)
+import           Blaze.ByteString.Builder (Builder, fromByteString, toByteString, toLazyByteString)
+import           Blaze.ByteString.Builder.Word (fromWord8)
+
 #if __GLASGOW_HASKELL__ < 710
-import Control.Applicative ((<$>))
+import           Control.Applicative ((<$>))
 #endif
-import Data.Attoparsec.ByteString as A
-import Data.Attoparsec.Lazy as AL
-import Data.Bits ((.|.), (.&.), shiftL, shiftR)
-import Data.ByteString (ByteString)
+
+import           Data.Attoparsec.ByteString as A
+import           Data.Attoparsec.Lazy as AL
+import           Data.Bits ((.|.), (.&.), shiftL, shiftR)
+import           Data.ByteString (ByteString)
 #if __GLASGOW_HASKELL__ < 710
-import Data.Monoid (mappend, mempty)
+import           Data.Monoid (mappend, mempty)
 #endif
-import Data.Text (Text)
-import Data.Word (Word8)
-import Data.Bifunctor (second, first)
+import           Data.Text (Text)
+import           Data.Word (Word8)
+import           Data.Bifunctor (second, first)
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Lazy as L
 import qualified Data.ByteString.Unsafe as B
