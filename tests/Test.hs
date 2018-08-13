@@ -1,20 +1,17 @@
-{-# LANGUAGE CPP                 #-}
-{-# LANGUAGE LambdaCase          #-}
-{-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE ParallelListComp    #-}
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ParallelListComp #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
 module Main where
 
 import           Control.Monad
-#if __GLASGOW_HASKELL__ <= 708
-import           Control.Applicative
-#endif
-import qualified Data.Map as M
-import qualified Data.Set as S
-import qualified Data.Sequence as Seq
-import           Data.List.NonEmpty (NonEmpty(..))
 import           Data.Foldable (toList)
+import           Data.List.NonEmpty (NonEmpty(..))
+import qualified Data.Map as M
+import qualified Data.Sequence as Seq
+import qualified Data.Set as S
 #if __GLASGOW_HASKELL__ < 804
 import           Data.Semigroup
 #endif

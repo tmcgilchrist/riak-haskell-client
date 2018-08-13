@@ -1,5 +1,4 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE CPP #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 -- |
@@ -18,49 +17,47 @@ module Network.Riak.Tag
     , getTag
     ) where
 
-import Data.Binary.Put (Put, putWord8)
-import Data.Word (Word8)
+import           Data.Binary.Put (Put, putWord8)
 import qualified Data.HashMap.Strict as HM
-#if __GLASGOW_HASKELL__ <= 708
-import Control.Applicative
-#endif
-import Data.Tuple (swap)
-import Network.Riak.Protocol.DeleteRequest
-import Network.Riak.Protocol.ErrorResponse
-import Network.Riak.Protocol.GetBucketRequest
-import Network.Riak.Protocol.GetBucketTypeRequest
-import Network.Riak.Protocol.GetBucketResponse
-import Network.Riak.Protocol.GetClientIDRequest
-import Network.Riak.Protocol.GetClientIDResponse
-import Network.Riak.Protocol.GetRequest
-import Network.Riak.Protocol.GetResponse
-import Network.Riak.Protocol.IndexRequest
-import Network.Riak.Protocol.IndexResponse
-import Network.Riak.Protocol.GetServerInfoRequest
-import Network.Riak.Protocol.ListBucketsRequest
-import Network.Riak.Protocol.ListBucketsResponse
-import Network.Riak.Protocol.ListKeysRequest
-import Network.Riak.Protocol.ListKeysResponse
-import Network.Riak.Protocol.MapReduce
-import Network.Riak.Protocol.MapReduceRequest
-import Network.Riak.Protocol.PingRequest
-import Network.Riak.Protocol.PutRequest
-import Network.Riak.Protocol.PutResponse
-import Network.Riak.Protocol.ServerInfo
-import Network.Riak.Protocol.SetBucketRequest
-import Network.Riak.Protocol.SetClientIDRequest
-import Network.Riak.Protocol.DtFetchRequest
-import Network.Riak.Protocol.DtFetchResponse
-import Network.Riak.Protocol.DtUpdateRequest
-import Network.Riak.Protocol.DtUpdateResponse
-import Network.Riak.Protocol.SearchQueryRequest
-import Network.Riak.Protocol.SearchQueryResponse
-import Network.Riak.Protocol.YzIndexGetRequest
-import Network.Riak.Protocol.YzIndexGetResponse
-import Network.Riak.Protocol.YzIndexPutRequest
-import Network.Riak.Protocol.YzIndexDeleteRequest
-import Network.Riak.Types.Internal as Types
-import Text.ProtocolBuffers.Get (Get, getWord8)
+import           Data.Tuple (swap)
+import           Data.Word (Word8)
+
+import           Network.Riak.Protocol.DeleteRequest
+import           Network.Riak.Protocol.DtFetchRequest
+import           Network.Riak.Protocol.DtFetchResponse
+import           Network.Riak.Protocol.DtUpdateRequest
+import           Network.Riak.Protocol.DtUpdateResponse
+import           Network.Riak.Protocol.ErrorResponse
+import           Network.Riak.Protocol.GetBucketRequest
+import           Network.Riak.Protocol.GetBucketResponse
+import           Network.Riak.Protocol.GetBucketTypeRequest
+import           Network.Riak.Protocol.GetClientIDRequest
+import           Network.Riak.Protocol.GetClientIDResponse
+import           Network.Riak.Protocol.GetRequest
+import           Network.Riak.Protocol.GetResponse
+import           Network.Riak.Protocol.GetServerInfoRequest
+import           Network.Riak.Protocol.IndexRequest
+import           Network.Riak.Protocol.IndexResponse
+import           Network.Riak.Protocol.ListBucketsRequest
+import           Network.Riak.Protocol.ListBucketsResponse
+import           Network.Riak.Protocol.ListKeysRequest
+import           Network.Riak.Protocol.ListKeysResponse
+import           Network.Riak.Protocol.MapReduce
+import           Network.Riak.Protocol.MapReduceRequest
+import           Network.Riak.Protocol.PingRequest
+import           Network.Riak.Protocol.PutRequest
+import           Network.Riak.Protocol.PutResponse
+import           Network.Riak.Protocol.SearchQueryRequest
+import           Network.Riak.Protocol.SearchQueryResponse
+import           Network.Riak.Protocol.ServerInfo
+import           Network.Riak.Protocol.SetBucketRequest
+import           Network.Riak.Protocol.SetClientIDRequest
+import           Network.Riak.Protocol.YzIndexDeleteRequest
+import           Network.Riak.Protocol.YzIndexGetRequest
+import           Network.Riak.Protocol.YzIndexGetResponse
+import           Network.Riak.Protocol.YzIndexPutRequest
+import           Network.Riak.Types.Internal as Types
+import           Text.ProtocolBuffers.Get (Get, getWord8)
 
 instance Tagged ErrorResponse where
     messageTag _ = Types.ErrorResponse

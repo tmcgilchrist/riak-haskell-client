@@ -1,4 +1,9 @@
-{-# LANGUAGE CPP, OverloadedStrings, RecordWildCards, ScopedTypeVariables, FlexibleContexts, MultiWayIf #-}
+{-# LANGUAGE CPP#-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE MultiWayIf #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 -- |
@@ -37,29 +42,34 @@ module Network.Riak.Connection.Internal
     , recvResponse_
     ) where
 
-import Control.Concurrent.Async (async, waitBoth)
-import Control.Exception (Exception, IOException, throwIO, bracketOnError)
-import Control.Monad (forM_, replicateM)
-import Data.Binary.Put (Put, putWord32be, runPut)
-import Data.IORef (newIORef, readIORef, writeIORef)
-import Data.Int (Int64)
-import Network.Riak.Connection.NoPush (setNoPush)
-import Network.Riak.Debug as Debug
-import Network.Riak.Protocol.ErrorResponse
-import Network.Riak.Protocol.SetClientIDRequest
-import Network.Riak.Tag (getTag, putTag)
-import Network.Riak.Types.Internal hiding (MessageTag(..))
-import Network.Socket as Socket
-import Numeric (showHex)
-import System.Random (randomIO)
-import Text.ProtocolBuffers (messageGetM, messagePutM, messageSize)
-import Text.ProtocolBuffers.Get (Get, Result(..), getWord32be, runGet)
+import           Control.Concurrent.Async (async, waitBoth)
+import           Control.Exception (Exception, IOException, throwIO, bracketOnError)
 import qualified Control.Exception as E
+import           Control.Monad (forM_, replicateM)
+
+import           Data.Binary.Put (Put, putWord32be, runPut)
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Lazy.Char8 as L
+import           Data.IORef (newIORef, readIORef, writeIORef)
+import           Data.Int (Int64)
+
+import           Network.Riak.Connection.NoPush (setNoPush)
+import           Network.Riak.Debug as Debug
+import           Network.Riak.Protocol.ErrorResponse
+import           Network.Riak.Protocol.SetClientIDRequest
+import           Network.Riak.Tag (getTag, putTag)
 import qualified Network.Riak.Types.Internal as T
+import           Network.Riak.Types.Internal hiding (MessageTag(..))
+import           Network.Socket as Socket
 import qualified Network.Socket.ByteString as B
 import qualified Network.Socket.ByteString.Lazy as L
+
+import           Numeric (showHex)
+
+import           System.Random (randomIO)
+
+import           Text.ProtocolBuffers (messageGetM, messagePutM, messageSize)
+import           Text.ProtocolBuffers.Get (Get, Result(..), getWord32be, runGet)
 
 -- | Default client configuration.  Talks to localhost, port 8087,
 -- with a randomly chosen client ID.

@@ -1,4 +1,6 @@
-{-# LANGUAGE BangPatterns, DeriveDataTypeable, GeneralizedNewtypeDeriving, CPP #-}
+{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 -- |
 -- Module:      Network.Riak.Resolvable.Internal
 -- Copyright:   (c) 2011 MailRank, Inc.
@@ -29,26 +31,22 @@ module Network.Riak.Resolvable.Internal
     , putMany_
     ) where
 
-#if __GLASGOW_HASKELL__ < 710
-import Control.Applicative ((<$>))
-#endif
-import Control.Arrow (first)
-import Control.Exception (Exception, throwIO)
-import Control.Monad (unless)
-import Control.Monad.IO.Class
-import Data.Aeson.Types (FromJSON, ToJSON)
-import Data.Data (Data)
-import Data.Either (partitionEithers)
-import Data.Function (on)
-import Data.List (foldl', sortBy)
-import Data.Maybe (isJust)
-#if __GLASGOW_HASKELL__ < 710
-import Data.Monoid (Monoid(mappend))
-#endif
-import Data.Semigroup (Semigroup)
-import Data.Typeable (Typeable)
-import Network.Riak.Debug (debugValues)
-import Network.Riak.Types.Internal hiding (MessageTag(..))
+import           Control.Arrow (first)
+import           Control.Exception (Exception, throwIO)
+import           Control.Monad (unless)
+import           Control.Monad.IO.Class
+
+import           Data.Aeson.Types (FromJSON, ToJSON)
+import           Data.Data (Data)
+import           Data.Either (partitionEithers)
+import           Data.Function (on)
+import           Data.List (foldl', sortBy)
+import           Data.Maybe (isJust)
+import           Data.Semigroup (Semigroup)
+import           Data.Typeable (Typeable)
+
+import           Network.Riak.Debug (debugValues)
+import           Network.Riak.Types.Internal hiding (MessageTag(..))
 
 -- | Automated conflict resolution failed.
 data ResolutionFailure = RetriesExceeded

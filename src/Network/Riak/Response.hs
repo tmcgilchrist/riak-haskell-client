@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE RecordWildCards #-}
 
@@ -30,32 +29,25 @@ module Network.Riak.Response
     , getIndex
     ) where
 
-#if __GLASGOW_HASKELL__ < 710
-import           Control.Applicative ((<$>))
-import           Control.Arrow ((&&&))
-import           Control.Monad (join)
-
-import           Data.Semigroup
-#endif
-
 import qualified Data.ByteString.Lazy as L
 import qualified Data.Sequence as Seq
 import           Data.Maybe (fromMaybe)
 import           Data.Foldable (toList)
 
+import           Network.Riak.Escape
 import           Network.Riak.Protocol.BucketProps (BucketProps)
 import           Network.Riak.Protocol.Content
 import           Network.Riak.Protocol.GetBucketResponse
 import           Network.Riak.Protocol.GetClientIDResponse
 import           Network.Riak.Protocol.GetResponse
+import qualified Network.Riak.Protocol.Link as Link
 import           Network.Riak.Protocol.ListBucketsResponse
+import qualified Network.Riak.Protocol.Pair as Pair
 import           Network.Riak.Protocol.PutResponse
-import qualified Network.Riak.Protocol.SearchQueryResponse as Q
 import qualified Network.Riak.Protocol.SearchDoc as Q
+import qualified Network.Riak.Protocol.SearchQueryResponse as Q
 import qualified Network.Riak.Protocol.YzIndexGetResponse as Yz
 import           Network.Riak.Types.Internal hiding (MessageTag(..))
-import qualified Network.Riak.Protocol.Link as Link
-import qualified Network.Riak.Protocol.Pair as Pair
 
 getClientID :: GetClientIDResponse -> ClientID
 getClientID = client_id

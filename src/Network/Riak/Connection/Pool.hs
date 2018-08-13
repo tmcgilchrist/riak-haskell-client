@@ -1,5 +1,7 @@
-{-# LANGUAGE DeriveDataTypeable, NamedFieldPuns, RecordWildCards,
-    ScopedTypeVariables, FlexibleContexts #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE FlexibleContexts #-}
 
 -- |
 -- Module:      Network.Riak.Connection.Pool
@@ -24,12 +26,14 @@ module Network.Riak.Connection.Pool
     , withConnectionM
     ) where
 
-import Control.Monad.Trans.Control (MonadBaseControl)
-import Data.Time.Clock (NominalDiffTime)
-import Data.Typeable (Typeable)
-import Network.Riak (Client(clientID), Connection, connect, disconnect)
-import Network.Riak.Connection (makeClientID)
+import           Control.Monad.Trans.Control (MonadBaseControl)
+
 import qualified Data.Pool as Pool
+import           Data.Time.Clock (NominalDiffTime)
+import           Data.Typeable (Typeable)
+
+import           Network.Riak (Client(clientID), Connection, connect, disconnect)
+import           Network.Riak.Connection (makeClientID)
 
 -- | A pool of connections to a Riak server.
 --

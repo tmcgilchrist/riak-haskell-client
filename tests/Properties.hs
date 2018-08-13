@@ -1,21 +1,20 @@
-{-# LANGUAGE CPP               #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 {-# OPTIONS_GHC -fno-warn-unused-binds #-}
 
 module Properties where
 
-#if __GLASGOW_HASKELL__ < 710
-import           Control.Applicative          ((<$>))
-#endif
-import qualified Data.ByteString.Lazy         as L
+import qualified Data.ByteString.Lazy as L
 import           Data.Maybe
-import qualified Network.Riak.Basic           as B
-import           Network.Riak.Content         (binary)
-import           Network.Riak.Types           as Riak
-import           Test.QuickCheck.Monadic      (assert, monadicIO, run)
+
+import qualified Network.Riak.Basic as B
+import           Network.Riak.Content (binary)
+import           Network.Riak.Types as Riak
+
+import           Test.QuickCheck.Monadic (assert, monadicIO, run)
 import           Test.Tasty
 import           Test.Tasty.QuickCheck
+
 import           Utils
 
 instance Arbitrary L.ByteString where

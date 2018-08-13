@@ -1,7 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE LambdaCase         #-}
-{-# LANGUAGE TemplateHaskell    #-}
-{-# LANGUAGE CPP #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE TemplateHaskell #-}
 module Utils
   ( globalAdmin
   , globalHost
@@ -11,23 +10,22 @@ module Utils
   , ShellFailure(..)
   ) where
 
-#if __GLASGOW_HASKELL__ < 710
-import Control.Applicative
-#endif
-import Control.Exception
-import Control.Monad
-import Data.Typeable
-import Data.Yaml.TH (decodeFile)
-import Internal
-import System.Exit
-import System.IO.Unsafe (unsafePerformIO)
-import System.Timeout
+import           Control.Exception
+import           Control.Monad
+
+import           Data.Typeable
+import           Data.Yaml.TH (decodeFile)
+
+import           Internal
 
 import qualified Network.Riak as Riak
 import qualified Network.Riak.Basic as B
-import Network.Riak.Connection.Pool (Pool, create, withConnection)
+import           Network.Riak.Connection.Pool (Pool, create, withConnection)
 
+import           System.Exit
+import           System.IO.Unsafe (unsafePerformIO)
 import qualified System.Process as Process
+import           System.Timeout
 
 config :: Config
 config = $$(decodeFile "tests/test.yaml")

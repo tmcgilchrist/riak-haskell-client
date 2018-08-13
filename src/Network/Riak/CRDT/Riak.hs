@@ -12,7 +12,6 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE CPP #-}
 
 module Network.Riak.CRDT.Riak (
     counterSendUpdate
@@ -20,11 +19,6 @@ module Network.Riak.CRDT.Riak (
   , mapSendUpdate
   , get
   ) where
-
-#if __GLASGOW_HASKELL__ <= 708
-import           Control.Applicative
-import           Data.Int
-#endif
 
 import           Control.Exception (catchJust)
 

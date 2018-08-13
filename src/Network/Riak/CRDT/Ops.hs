@@ -19,10 +19,9 @@ module Network.Riak.CRDT.Ops (
   ) where
 
 import           Data.ByteString.Lazy (ByteString)
-import           Data.Monoid ((<>))
+import           Data.Semigroup (Semigroup((<>)))
 import qualified Data.Sequence as Seq
 import qualified Data.Set as S
-
 import           Network.Riak.CRDT.Types
 import qualified Network.Riak.Protocol.CounterOp as PB
 import qualified Network.Riak.Protocol.DtOp as PB
@@ -31,12 +30,6 @@ import qualified Network.Riak.Protocol.MapField.MapFieldType as PBMap
 import qualified Network.Riak.Protocol.MapOp as PBMap
 import qualified Network.Riak.Protocol.MapUpdate as PBMap
 import qualified Network.Riak.Protocol.MapUpdate.FlagOp as PBFlag
-
-import           Data.ByteString.Lazy (ByteString)
-import           Data.Semigroup (Semigroup((<>)))
-import qualified Data.Sequence as Seq
-import qualified Data.Set as S
-import           Network.Riak.CRDT.Types
 import qualified Network.Riak.Protocol.SetOp as PBSet
 
 counterUpdateOp :: [CounterOp] -> PB.DtOp

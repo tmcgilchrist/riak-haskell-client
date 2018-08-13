@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 
@@ -28,14 +27,8 @@ module Network.Riak.JSON
     , putMany_
     ) where
 
-#if __GLASGOW_HASKELL__ < 710
-import           Control.Applicative ((<$>))
-#endif
 import           Control.Arrow (first)
 import           Data.Aeson.Types (FromJSON(..), ToJSON(..))
-#if __GLASGOW_HASKELL__ < 710
-import           Data.Monoid (Monoid)
-#endif
 import           Data.Semigroup (Semigroup)
 import           Data.Typeable (Typeable)
 import           Network.Riak.Types.Internal

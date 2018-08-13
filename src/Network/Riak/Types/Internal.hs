@@ -1,5 +1,8 @@
-{-# LANGUAGE BangPatterns, DeriveDataTypeable, FunctionalDependencies,
-    MultiParamTypeClasses, RecordWildCards, DeriveGeneric #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE FunctionalDependencies #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE DeriveGeneric #-}
 
 -- |
 -- Module:      Network.Riak.Types.Internal
@@ -57,6 +60,7 @@ module Network.Riak.Types.Internal
     ) where
 
 import           Control.Exception (Exception, throw)
+
 import           Data.ByteString.Lazy (ByteString)
 import           Data.Digest.Pure.MD5 (md5)
 import           Data.Hashable (Hashable)
@@ -64,11 +68,13 @@ import           Data.IORef (IORef)
 import           Data.Sequence (Seq)
 import           Data.Typeable (Typeable)
 import           Data.Word (Word32)
+
 import           GHC.Generics (Generic)
+
 import qualified Network.Riak.Protocol.YzIndex as YzIndex
 import           Network.Socket (HostName, ServiceName, Socket)
-import           Text.ProtocolBuffers (ReflectDescriptor, Wire)
 
+import           Text.ProtocolBuffers (ReflectDescriptor, Wire)
 
 -- | A client identifier.  This is used by the Riak cluster when
 -- logging vector clock changes, and should be unique for each client.

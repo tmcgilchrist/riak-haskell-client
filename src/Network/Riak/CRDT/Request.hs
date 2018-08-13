@@ -15,6 +15,7 @@ module Network.Riak.CRDT.Request (
   ) where
 
 import           Data.ByteString.Lazy (ByteString)
+
 import           Network.Riak.CRDT.Ops
 import qualified Network.Riak.CRDT.Types as CRDT
 import qualified Network.Riak.Protocol.DtFetchRequest as DtFetch

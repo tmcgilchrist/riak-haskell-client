@@ -18,10 +18,8 @@ module Network.Riak.Search
   , searchRaw
   ) where
 
-#if __GLASGOW_HASKELL__ <= 708
-import           Control.Applicative
-#endif
 import           Data.Sequence (Seq)
+
 import           Network.Riak.Connection.Internal
 import           Network.Riak.Protocol.Content (Content)
 import           Network.Riak.Protocol.YzIndex (YzIndex(YzIndex))

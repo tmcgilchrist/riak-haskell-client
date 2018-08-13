@@ -3,8 +3,14 @@
 --     author:    Antonio Nikishaev <me@lelf.lu>
 --     license:   Apache
 --
-{-# LANGUAGE OverloadedStrings, FlexibleContexts, TupleSections, ScopedTypeVariables,
-    GADTs, StandaloneDeriving, UndecidableInstances, PatternGuards, MultiParamTypeClasses, CPP #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE TupleSections #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE PatternGuards #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 module CRDTProperties (prop_counters,
                        prop_sets,
@@ -16,26 +22,25 @@ module CRDTProperties (prop_counters,
 -- command output to list :: [Maybe RiakReturnValue].  Then see it we
 -- get the same list of results simulating Riak in this module.
 
-#if __GLASGOW_HASKELL__ <= 708
-import Control.Applicative
-#endif
-import Control.Monad.RWS
-import Data.ByteString.Lazy (ByteString)
-import Data.Default.Class
-import Data.List.NonEmpty
-import qualified Data.Map as Map
-import Data.Maybe
-import Data.Proxy
-import qualified Data.Set as Set
-import Test.QuickCheck
-import Test.QuickCheck.Monadic
+import           Control.Monad.RWS
 
-import Utils
-import Test.Tasty
-import Test.Tasty.QuickCheck
+import           Data.ByteString.Lazy (ByteString)
+import           Data.Default.Class
+import           Data.List.NonEmpty
+import qualified Data.Map as Map
+import           Data.Maybe
+import           Data.Proxy
+import qualified Data.Set as Set
 
 import qualified Network.Riak.Basic as B
 import qualified Network.Riak.CRDT  as C
+
+import           Test.QuickCheck
+import           Test.QuickCheck.Monadic
+import           Test.Tasty
+import           Test.Tasty.QuickCheck
+
+import           Utils
 
 newtype BucketType = BucketType ByteString deriving (Show,Eq,Ord)
 newtype Bucket     = Bucket ByteString deriving (Show,Eq,Ord)

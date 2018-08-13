@@ -7,19 +7,14 @@
 -- Stability:   experimental
 -- Portability: portable
 --
-
 {-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE CPP #-}
+
 module Network.Riak.CRDT.Response (get) where
 
-#if __GLASGOW_HASKELL__ <= 708
-import           Control.Applicative ((<$>))
-import           Data.Traversable
-#endif
 import qualified Data.Sequence as Seq
 import qualified Data.Map as Map
 import           Data.Foldable (toList)
-import           Data.Maybe (catMaybes)
+import           Data.Maybe (mapMaybe)
 import           Network.Riak.Protocol.DtFetchResponse (DtFetchResponse,value,type')
 import           Network.Riak.Protocol.DtFetchResponse.DataType (DataType(..))
 import           Network.Riak.Protocol.DtValue (counter_value,set_value,map_value)
@@ -40,7 +35,7 @@ get resp = case type' resp of
                  DTMap . deconstructMap . map_value <$> value resp
 
 deconstructMap :: Seq.Seq M.MapEntry -> Map
-deconstructMap = Map . Map.fromList . catMaybes . map f . toList
+deconstructMap = Map . Map.fromList . mapMaybe f . toList
 
 f :: M.MapEntry -> Maybe (MapField, MapEntry)
 f (M.MapEntry{..}) = sequenceA (MapField t name, v)

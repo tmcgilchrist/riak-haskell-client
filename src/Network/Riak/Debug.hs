@@ -23,7 +23,7 @@ module Network.Riak.Debug
     ) where
 
 import           Control.Concurrent.MVar (MVar, modifyMVar_, newMVar, withMVar)
-import           Control.Exception
+import           Control.Exception hiding (handle)
 import           Control.Monad (forM_, when)
 
 import           Network.Riak.Types.Internal
